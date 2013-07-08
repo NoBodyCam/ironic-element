@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eux
+
+# ironic requires numpy which seems to fail installing via pip.
+install-packages subversion libatlas-base-dev gfortran gfortran-multilib
+
+os-svc-install -n ironic \
+    -u ironic \
+    -r https://github.com/openstack/ironic.git
+

@@ -1,0 +1,16 @@
+#!/bin/bash
+set -eux
+service mysql restart
+# run dbsync
+# TODO(Chris): rework the logic for this.
+connect_str=$(sed -n 's/.*connection=*\([^ ]*.*\)/\1/p' < /etc/ironic/ironic.conf)
+if [[ "$connect_str" = *mysql* ]]; then
+    mysql_host=$(echo $connect_str|awk -F'/' '{ split($3,x,":"); split(x[2],y,"@"); print y[2] }')
+    if [ ${mysql_host:0:4} == "127." -o "$mysql_host" == "localhost" ]; then
+        db_name=$(echo $connect_str|awk -F'/' '{ print $4 }')
+        mysql_user=$(echo $connect_str|awk -F'/' '{ split($3,x,":"); print x[1] }')
+        mysql_passwd=$(echo $connect_str|awk -F'/' '{ split($3,x,":"); split(x[2],y,"@"); print y[1] }')
+        os-db-create $db_name $mysql_user $mysql_passwd
+    fi
+fi
+/opt/stack/venvs/ironic/bin/ironic-dbsync --debug --config-file /etc/ironic/ironic.conf

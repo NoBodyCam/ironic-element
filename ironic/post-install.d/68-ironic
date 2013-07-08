@@ -1,0 +1,6 @@
+#!/bin/bash
+set -eux
+
+os-svc-daemon ironic-conductor ironic ironic-conductor "--debug --log-config /etc/ironic/logging.conf --config-file /etc/ironic/ironic.conf"
+
+os-svc-daemon ironic-api ironic ironic-api "--debug --log-config /etc/ironic/logging.conf --config-file /etc/ironic/ironic.conf"
