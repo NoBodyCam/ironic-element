@@ -1,5 +1,5 @@
 HeatTemplateFormatVersion: '2012-12-12'
-Description: 'Ironic initial template'
+Description: 'Ironic template'
 Parameters:
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
@@ -13,12 +13,12 @@ Parameters:
     Description: Ironic image id.
     Type: String
     Default: ironic
-  NovaDb:
-    Description: Database connection.
+  IronicDb:
+    Description: Ironic database connection.
     Type: String
     Default: mysql://ironic:ironic@127.0.0.1/ironic
   PostfixMailHostname:
-    Description: Hostname for postfix..
+    Description: Hostname for postfix.
     Type: String
     Default: ironic-ironic
   PostfixMailDomain:
@@ -60,9 +60,9 @@ Resources:
       rabbit:
         host:
           Ref: RabbitHost
-      nova:
+      ironic:
         db:
-          Ref: NovaDb
+          Ref: IronicDb
       mysql:
         create-users:
           - username: ironic

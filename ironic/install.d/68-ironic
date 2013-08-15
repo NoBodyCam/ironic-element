@@ -2,6 +2,7 @@
 set -eux
 
 # ironic requires numpy which seems to fail installing via pip.
+# including subversion to clean up a "not found" error while installing
 install-packages subversion libatlas-base-dev gfortran gfortran-multilib
 
 os-svc-install -n ironic \

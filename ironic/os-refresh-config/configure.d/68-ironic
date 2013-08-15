@@ -2,7 +2,7 @@
 set -eux
 service mysql restart
 # run dbsync
-# TODO(Chris): rework the logic for this.
+# TODO(Chris): Remove this once Ironic is past initial development.
 connect_str=$(sed -n 's/.*connection=*\([^ ]*.*\)/\1/p' < /etc/ironic/ironic.conf)
 if [[ "$connect_str" = *mysql* ]]; then
     mysql_host=$(echo $connect_str|awk -F'/' '{ split($3,x,":"); split(x[2],y,"@"); print y[2] }')
