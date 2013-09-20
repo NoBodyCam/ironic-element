@@ -1,0 +1,22 @@
+[DEFAULT]
+rabbit_host={{rabbit.host}}
+rabbit_port=5672
+rabbit_userid=guest
+rabbit_password={{rabbit.password}}
+
+default_log_levels='amqplib=DEBUG, sqlalchemy=DEBUG, keystone=DEBUG, eventlet.wsgi.server=DEBUG'
+
+[database]
+connection={{ironic.db}}
+
+[keystone_authtoken]
+auth_host={{keystone.host}}
+auth_port=35357
+auth_protocol=http
+admin_password = {{service-password}}
+admin_tenant_name=service
+admin_user=ironic
+
+[glance]
+host={{glance.host}}
+

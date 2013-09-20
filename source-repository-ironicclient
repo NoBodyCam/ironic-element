@@ -1,0 +1,1 @@
+python-ironicclient git /opt/stack/python-ironicclient https://github.com/openstack/python-ironicclient.git

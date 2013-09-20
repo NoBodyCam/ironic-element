@@ -1,17 +1,11 @@
-ironic-element
-==============
+Ironic development element
 
-initial ironic element
+Install and configure Ironic as a standalone service.
+Install python-ironicclient
 
-This Disk-image-builder element is currently used for testing the
-Ironic baremetal service.
+A sample heat template that can be merged with the undercloud-vm
+template may be found in the yaml folder. This should be moved
+into the tripleo-heat-templates folder.
 
-It is intended to be launched from boot-stack the boot-stack vm. The
-Heat template (ironic.yaml) is configured with defaults that enable it
-to make use of some of the Boot-Stack services, such as RabbitMq.
-
-For testing the Ironic element may be built with the mysql element.
-The ORC/configure script will attempt to detect if mysql is a local 
-service and if so, it will create a ironic database and run db-sync.
-If the Ironic image is built with out a local mysql, you must create
-the database and run db-sync before starting the ironic image.
+Note: this is element is intended for developer use.
+      See https://wiki.openstack.org/wiki/Ironic#Using_Disk_Image_Builder

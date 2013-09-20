@@ -1,0 +1,35 @@
+#!/bin/bash
+set -eux
+
+# need the libssl header files
+install-packages libssl-dev
+# for client
+install-packages git build-essential python-dev libssl-dev python-pip
+
+os-svc-install -n ironic \
+    -u ironic \
+    -r /opt/stack/ironic
+
+
+
+repo=python-ironicclient
+
+virtualenv --system-site-packages /opt/stack/venvs/$repo
+set +u
+source /opt/stack/venvs/$repo/bin/activate
+set -u
+
+pushd /opt/stack/$repo
+if [ -e requirements.txt ]; then
+PIP_INDEX_URL=http://pypi.openstack.org/openstack/ \
+            pip install -r requirements.txt
+elif [ -e tools/pip-requires ]; then
+PIP_INDEX_URL=http://pypi.openstack.org/openstack/ \
+            pip install -r tools/pip-requires
+fi
+python setup.py develop --script-dir /usr/local/bin
+popd
+
+set +u
+deactivate
+set -u
