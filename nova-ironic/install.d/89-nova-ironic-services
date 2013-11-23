@@ -1,0 +1,25 @@
+#!/bin/bash
+set -eux
+
+# this is a total hack and should never be used.
+cd /opt/stack/nova
+git config user.email "nobodycam@gmail.com"
+git config user.name "Chris Krelle"
+
+
+git reset
+git remote set-url origin https://github.com/openstack/nova.git
+git remote update
+git pull --no-edit --commit https://review.openstack.org/openstack/nova refs/changes/28/51328/2
+
+set +u
+source /opt/stack/venvs/nova/bin/activate
+set -u
+# had enough hacking yet.
+pip install /opt/stack/python-ironicclient
+pip install /opt/stack/ironic
+
+pip install /opt/stack/nova
+set +u
+deactivate
+set -u

@@ -1,5 +1,0 @@
-#!/bin/bash
-set -eu
-
-service ironic-api restart
-service ironic-conductor restart
