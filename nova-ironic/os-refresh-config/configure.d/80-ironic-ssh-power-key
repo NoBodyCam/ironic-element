@@ -5,12 +5,12 @@ set -eux
 #
 # This key is to be retrieved to allow nova to ssh
 # into the host machine when using VirtualPowerManager
-KEYPATH=/opt/stack/boot-stack/virtual-power-key
+KEYPATH=/opt/stack/boot-stack/ironic-ssh-power-key
 if [ ! -e $KEYPATH ] ; then
     ssh-keygen -t rsa -f $KEYPATH \
-        -N '' -C 'boot-stack key for use with nova VirtualPowerDriver'
+        -N '' -C 'boot-stack key for use with Ironic SSH power driver'
 fi
-chown nova:nova ${KEYPATH}*
+chown ironic:ironic ${KEYPATH}*
 chmod 400 ${KEYPATH}*
 chmod a+r ${KEYPATH}.pub
 
