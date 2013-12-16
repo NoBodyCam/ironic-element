@@ -10,7 +10,7 @@ git config user.name "Chris Krelle"
 git reset
 git remote set-url origin https://github.com/openstack/nova.git
 git remote update
-git pull --no-edit --commit https://review.openstack.org/openstack/nova refs/changes/28/51328/6
+git pull --no-edit --commit https://review.openstack.org/openstack/nova refs/changes/28/51328/7
 
 set +u
 source /opt/stack/venvs/nova/bin/activate
